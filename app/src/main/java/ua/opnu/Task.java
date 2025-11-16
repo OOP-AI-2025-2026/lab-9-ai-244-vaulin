@@ -12,9 +12,9 @@ public class Task {
         if (list == null || list.size() < 2) return;
         int i = 0;
         while (i + 1 < list.size()) {
-            String a = list.get(i);
-            String b = list.get(i + 1);
-            if (a.length() <= b.length()) {
+            String firstOne = list.get(i);
+            String secondOne = list.get(i + 1);
+            if (firstOne.length() <= secondOne.length()) {
                 list.remove(i);
             } else {
                 list.remove(i + 1);
@@ -27,8 +27,8 @@ public class Task {
         if (list == null || list.isEmpty()) return;
         int i = 0;
         while (i < list.size()) {
-            String val = list.get(i);
-            list.add(i + 1, val);
+            String vaule = list.get(i);
+            list.add(i + 1, vaule);
             i += 2;
         }
     }
@@ -56,8 +56,8 @@ public class Task {
         if (list == null || list.isEmpty()) return;
         int i = 0;
         while (i < list.size()) {
-            String s = list.get(i);
-            if (s != null && s.length() == 4) {
+            String str = list.get(i);
+            if (str != null && str.length() == 4) {
                 list.add(i, "****");
                 i += 2;
             } else {
@@ -92,7 +92,7 @@ public class Task {
         List<Integer> tmp = new ArrayList<>();
         while (!queue.isEmpty()) tmp.add(queue.remove());
         Collections.sort(tmp);
-        for (Integer v : tmp) queue.add(v);
+        queue.addAll(tmp);
     }
 
     public void rearrange(Queue<Integer> queue) {
@@ -104,8 +104,8 @@ public class Task {
             if (v % 2 == 0) evens.add(v);
             else odds.add(v);
         }
-        for (Integer v : evens) queue.add(v);
-        for (Integer v : odds) queue.add(v);
+        queue.addAll(evens);
+        queue.addAll(odds);
     }
 
     public int maxLength(Set<String> set) {
@@ -119,11 +119,7 @@ public class Task {
 
     public void removeEvenLength(Set<String> set) {
         if (set == null || set.isEmpty()) return;
-        Iterator<String> it = set.iterator();
-        while (it.hasNext()) {
-            String s = it.next();
-            if (s != null && s.length() % 2 == 0) it.remove();
-        }
+        set.removeIf(s -> s != null && s.length() % 2 == 0);
     }
 
     public int numInCommon(List<Integer> list1, List<Integer> list2) {
